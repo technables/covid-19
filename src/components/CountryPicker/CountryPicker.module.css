@@ -1,0 +1,6 @@
+.formControl {
+  width: 40%;
+  margin-bottom: 30px !important;
+  display: flex;
+  flex-direction: column;
+}
