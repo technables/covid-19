@@ -2,16 +2,25 @@ import React from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import styles from "./Cards.module.css";
 import CountUp from "react-countup";
-import cx from 'classnames'
+import cx from "classnames";
 
-const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
+const Cards = ({
+  data: { confirmed, recovered, deaths, newcase, lastUpdate },
+}) => {
   if (!confirmed) {
     return "loading";
   }
+
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
-        <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.infected)}>
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(styles.card, styles.infected)}
+        >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               Infected
@@ -24,6 +33,11 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                 separator=","
               />
             </Typography>
+            {newcase && (
+              <Typography color="secondary" variant="caption">
+                (New cases: {newcase.n_confirmed})
+              </Typography>
+            )}
             <Typography color="textSecondary">
               {new Date(lastUpdate).toDateString()}
             </Typography>
@@ -32,7 +46,13 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             </Typography>
           </CardContent>
         </Grid>
-        <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.recovered)}>
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(styles.card, styles.recovered)}
+        >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               Recovered
@@ -45,6 +65,11 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                 separator=","
               />
             </Typography>
+            {newcase && (
+              <Typography color="primary" variant="caption">
+                (New Recovered: {newcase.n_recovered})
+              </Typography>
+            )}
             <Typography color="textSecondary">
               {new Date(lastUpdate).toDateString()}
             </Typography>
@@ -53,7 +78,13 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             </Typography>
           </CardContent>
         </Grid>
-        <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.deaths)}>
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(styles.card, styles.deaths)}
+        >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               Deaths
@@ -66,6 +97,11 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                 separator=","
               />
             </Typography>
+            {newcase && (
+              <Typography color="secondary" variant="caption">
+                (New Deaths: {newcase.n_deaths})
+              </Typography>
+            )}
             <Typography color="textSecondary">
               {new Date(lastUpdate).toDateString()}
             </Typography>
